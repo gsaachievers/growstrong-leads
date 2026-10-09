@@ -4,6 +4,7 @@ create table if not exists public.gsa_leads (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
   parent_name text not null check (length(trim(parent_name)) between 2 and 120),
+  email text,
   mobile text not null check (length(trim(mobile)) between 8 and 20),
   child_name text,
   child_age numeric(4,1) check (child_age between 0 and 18),
@@ -30,6 +31,6 @@ drop policy if exists "Staff update leads" on public.gsa_leads;
 create policy "Staff update leads" on public.gsa_leads for update to authenticated using (true) with check (true);
 -- Prevent anonymous clients from setting internal fields at INSERT time.
 revoke insert on public.gsa_leads from anon;
-grant insert (parent_name,mobile,child_name,child_age,center,program,source,notes) on public.gsa_leads to anon;
+grant insert (parent_name,mobile,email,child_name,child_age,center,program,source,notes) on public.gsa_leads to anon;
 grant select, update on public.gsa_leads to authenticated;
 -- Optional: avoid exposing internal staff edits to anonymous callers.

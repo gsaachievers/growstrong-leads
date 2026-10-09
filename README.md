@@ -21,3 +21,10 @@ Static GitHub Pages website + Supabase database. Public form at `index.html`; pa
 - QR image uses `api.qrserver.com` to encode the public form URL. No lead details are sent to that service.
 - CSV export includes only currently filtered and loaded leads, up to latest 5,000. CSV is Excel-compatible; not a native `.xlsx`. Leads are stored in Supabase, **not automatically appended to a shared Excel workbook**.
 - Ensure you have a privacy notice and appropriate consent for collecting parent/child details. Avoid sensitive child health information in Notes.
+
+## Updated form and logo
+The customer form now shows `growstrong-logo.png`, requires an email address, and offers Free Trial, School and Daycare Adventure Program, Summer Camp, Achiever Care, and Gymnastics and Ninja Program. The dashboard displays and exports email too.
+
+**Existing Supabase projects:** Run `migration_add_email.sql` in the Supabase SQL Editor before publishing the updated website. This adds the `email` column without deleting old leads. New installations can use the updated `schema.sql`.
+
+Upload the updated HTML, JS, CSS, and `growstrong-logo.png` to the GitHub repository root. Keep your existing configured `config.js` if you have already entered real Supabase credentials. Do not replace it with the placeholder from this package.
